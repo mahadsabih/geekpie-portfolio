@@ -15,6 +15,10 @@
       "destination": "/mern-app/server/server.js"
     },
     {
+      "source": "/uploads/:path*",
+      "destination": "/mern-app/server/uploads/:path*"
+    },
+    {
       "source": "/admin",
       "destination": "/mern-app/client/build/index.html"
     },
@@ -27,69 +31,24 @@
       "destination": "/mern-app/client/build/index.html"
     },
     {
+      "source": "/login/:path*",
+      "destination": "/mern-app/client/build/index.html"
+    },
+    {
       "source": "/dashboard",
       "destination": "/mern-app/client/build/index.html"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/mern-app/server/server.js"
     },
     {
-      "src": "/uploads/(.*)",
-      "dest": "/mern-app/server/uploads/$1"
+      "source": "/dashboard/:path*",
+      "destination": "/mern-app/client/build/index.html"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/mern-app/client/build/static/$1"
+      "source": "/project/:path*",
+      "destination": "/mern-app/client/build/index.html"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(admin|login|dashboard)(.*)",
-      "dest": "/mern-app/client/build/index.html"
-    },
-    {
-      "src": "/(wp-content/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(js/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(images/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(portfolio/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(ai-sector/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(contact-us/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(404-page/.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(api/.*)",
-      "dest": "/mern-app/server/server.js"
-    },
-    {
-      "src": "/(.*)\\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot)$",
-      "dest": "/$1.$2"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/project/new",
+      "destination": "/mern-app/client/build/index.html"
     }
   ],
   "headers": [
@@ -106,10 +65,18 @@
       ]
     },
     {
-      "source": "/static/(.*)",
+      "source": "/mern-app/client/build/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot)$",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
