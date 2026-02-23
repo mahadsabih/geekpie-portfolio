@@ -58,7 +58,7 @@ const ProjectForm = () => {
       });
       
       if (project.thumbnail) {
-        setThumbnailPreview(`http://localhost:5000${project.thumbnail}`);
+        setThumbnailPreview(project.thumbnail);
       }
     } catch (error) {
       toast.error('Failed to load project');

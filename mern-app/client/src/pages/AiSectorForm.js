@@ -58,7 +58,7 @@ const AiSectorForm = () => {
       });
       
       if (sector.thumbnail) {
-        setThumbnailPreview(`http://localhost:5000${sector.thumbnail}`);
+        setThumbnailPreview(sector.thumbnail);
       }
     } catch (error) {
       toast.error('Failed to load AI sector');

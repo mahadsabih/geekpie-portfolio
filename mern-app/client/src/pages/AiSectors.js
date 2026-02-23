@@ -157,7 +157,7 @@ const AiSectors = () => {
               <div className="project-thumbnail">
                 {sector.thumbnail ? (
                   <img 
-                    src={`http://localhost:5000${sector.thumbnail}`} 
+                    src={sector.thumbnail} 
                     alt={sector.title}
                     onError={(e) => {
                       e.target.onerror = null;

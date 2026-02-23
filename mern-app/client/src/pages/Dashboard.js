@@ -168,7 +168,7 @@ const Dashboard = () => {
               <div className="project-thumbnail">
                 {project.thumbnail ? (
                   <img 
-                    src={`http://localhost:5000${project.thumbnail}`} 
+                    src={project.thumbnail} 
                     alt={project.title}
                     onError={(e) => {
                       e.target.onerror = null;
