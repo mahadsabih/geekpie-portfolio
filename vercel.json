@@ -12,6 +12,10 @@
       "destination": "/uploads/:path*"
     },
     {
+      "source": "/static/:path*",
+      "destination": "/admin/static/:path*"
+    },
+    {
       "source": "/admin",
       "destination": "/admin/index.html"
     },
