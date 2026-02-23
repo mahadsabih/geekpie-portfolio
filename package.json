@@ -1,0 +1,32 @@
+{
+  "name": "geekpie-portfolio",
+  "version": "1.0.0",
+  "description": "GeekPie Portfolio - Static website with MERN admin dashboard",
+  "private": true,
+  "scripts": {
+    "install:server": "cd mern-app/server && npm install",
+    "install:client": "cd mern-app/client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "build:client": "cd mern-app/client && npm run build",
+    "dev:server": "cd mern-app/server && npm run dev",
+    "dev:client": "cd mern-app/client && npm start",
+    "start": "cd mern-app/server && npm start",
+    "vercel-build": "npm run install:all && npm run build:client"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/geekpie-portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "mern",
+    "react",
+    "express",
+    "vercel"
+  ],
+  "author": "GeekPie",
+  "license": "MIT"
+}
