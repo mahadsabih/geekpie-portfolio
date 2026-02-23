@@ -8,10 +8,11 @@
     "install:client": "cd mern-app/client && npm install",
     "install:all": "npm run install:server && npm run install:client",
     "build:client": "cd mern-app/client && npm run build",
+    "copy-admin": "node -e \"const fs=require('fs');const path=require('path');const src='mern-app/client/build';const dest='admin-build';if(fs.existsSync(src)){if(fs.existsSync(dest))fs.rmSync(dest,{recursive:true});fs.cpSync(src,dest,{recursive:true});console.log('Admin build copied to admin-build/');}else{console.log('Client build not found');}\"",
     "dev:server": "cd mern-app/server && npm run dev",
     "dev:client": "cd mern-app/client && npm start",
     "start": "cd mern-app/server && npm start",
-    "build": "npm run install:client && npm run build:client",
+    "build": "npm run install:client && npm run build:client && npm run copy-admin",
     "vercel-build": "npm run build"
   },
   "engines": {
