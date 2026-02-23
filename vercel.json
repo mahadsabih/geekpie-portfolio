@@ -28,7 +28,7 @@
       "destination": "/admin/index.html"
     },
     {
-      "source": "/login/:path*",
+      "source": "/login/",
       "destination": "/admin/index.html"
     },
     {
@@ -36,15 +36,15 @@
       "destination": "/admin/index.html"
     },
     {
-      "source": "/dashboard/:path*",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/project/:path*",
+      "source": "/dashboard/",
       "destination": "/admin/index.html"
     },
     {
       "source": "/project/new",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/project/:id",
       "destination": "/admin/index.html"
     }
   ],
@@ -74,6 +74,6 @@
       ]
     }
   ],
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false
 }
