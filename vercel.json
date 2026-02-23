@@ -3,7 +3,7 @@
   "public": true,
   "functions": {
     "mern-app/server/server.js": {
-      "runtime": "@vercel/node",
+      
       "includeFiles": "**/*.js",
       "memory": 1024,
       "maxDuration": 10
