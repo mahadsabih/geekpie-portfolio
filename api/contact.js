@@ -5,12 +5,12 @@ const nodemailer = require('nodemailer');
  * Handles form submissions and sends emails via SMTP
  */
 
-// CORS headers for cross-origin requests
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+// Set CORS headers on response (Vercel-compatible)
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+}
 
 // Create Nodemailer transporter
 function createTransporter() {
@@ -110,15 +110,18 @@ function escapeHtml(text) {
 
 // Main handler
 module.exports = async (req, res) => {
+  // Set CORS headers for all responses
+  setCorsHeaders(res);
+
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    res.status(200).set(corsHeaders).end();
+    res.status(200).end();
     return;
   }
 
   // Only allow POST requests
   if (req.method !== 'POST') {
-    res.status(405).set(corsHeaders).json({ 
+    res.status(405).json({ 
       success: false, 
       error: 'Method not allowed' 
     });
@@ -132,7 +135,7 @@ module.exports = async (req, res) => {
     // Validate form data
     const errors = validateFormData(data);
     if (errors.length > 0) {
-      res.status(400).set(corsHeaders).json({ 
+      res.status(400).json({ 
         success: false, 
         errors 
       });
@@ -142,7 +145,7 @@ module.exports = async (req, res) => {
     // Check if SMTP is configured
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.error('SMTP credentials not configured');
-      res.status(500).set(corsHeaders).json({ 
+      res.status(500).json({ 
         success: false, 
         error: 'Email service not configured. Please set SMTP environment variables.' 
       });
@@ -174,7 +177,7 @@ ${data.message}
     
     console.log('Email sent successfully:', info.messageId);
 
-    res.status(200).set(corsHeaders).json({ 
+    res.status(200).json({ 
       success: true, 
       message: 'Your message has been sent successfully! We will get back to you soon.',
       messageId: info.messageId 
@@ -183,7 +186,7 @@ ${data.message}
   } catch (error) {
     console.error('Error sending email:', error);
     
-    res.status(500).set(corsHeaders).json({ 
+    res.status(500).json({ 
       success: false, 
       error: 'Failed to send message. Please try again later.',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
