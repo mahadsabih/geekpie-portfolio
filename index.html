@@ -2550,6 +2550,50 @@
     });
 })();
 </script>
+        
+<script>
+(function() {
+    const loadMoreBtn = document.getElementById('pxl-load-more-btn');
+    if (!loadMoreBtn) return;
+    
+    const loaded = parseInt(loadMoreBtn.dataset.loaded);
+    const total = parseInt(loadMoreBtn.dataset.total);
+    const loadCount = parseInt(loadMoreBtn.dataset.loadCount);
+    
+    loadMoreBtn.addEventListener('click', function() {
+        const hiddenItems = document.querySelectorAll('.pxl-portfolio-hidden');
+        const itemsToShow = Math.min(loadCount, hiddenItems.length);
+        
+        for (let i = 0; i < itemsToShow; i++) {
+            hiddenItems[i].style.display = 'block';
+            hiddenItems[i].classList.remove('pxl-portfolio-hidden');
+            // Trigger animation
+            hiddenItems[i].classList.add('fadeInUp');
+        }
+        
+        const newLoaded = loaded + itemsToShow;
+        loadMoreBtn.dataset.loaded = newLoaded;
+        
+        const remaining = total - newLoaded;
+        if (remaining <= 0) {
+            loadMoreBtn.style.display = 'none';
+        } else {
+            loadMoreBtn.querySelector('.pxl-btn-text').textContent = 'Load More (' + remaining + ' more projects)';
+        }
+    });
+    
+    // Hover effect
+    loadMoreBtn.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = '#121212';
+        this.style.color = '#FF6B35';
+    });
+    
+    loadMoreBtn.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = '#FF6B35';
+        this.style.color = '#121212';
+    });
+})();
+</script>
 
                               <script>
                                 (function () {
