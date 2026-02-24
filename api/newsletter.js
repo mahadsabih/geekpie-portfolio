@@ -5,12 +5,12 @@ const nodemailer = require('nodemailer');
  * Handles email subscriptions and sends confirmation emails
  */
 
-// CORS headers for cross-origin requests
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+// Set CORS headers on response (Vercel-compatible)
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+}
 
 // Create Nodemailer transporter
 function createTransporter() {
@@ -102,15 +102,18 @@ function formatAdminNotificationHTML(email) {
 
 // Main handler
 module.exports = async (req, res) => {
+  // Set CORS headers for all responses
+  setCorsHeaders(res);
+
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    res.status(200).set(corsHeaders).end();
+    res.status(200).end();
     return;
   }
 
   // Only allow POST requests
   if (req.method !== 'POST') {
-    res.status(405).set(corsHeaders).json({ 
+    res.status(405).json({ 
       success: false, 
       error: 'Method not allowed' 
     });
@@ -124,7 +127,7 @@ module.exports = async (req, res) => {
     
     // Validate email
     if (!validateEmail(email)) {
-      res.status(400).set(corsHeaders).json({ 
+      res.status(400).json({ 
         success: false, 
         error: 'Please enter a valid email address' 
       });
@@ -134,7 +137,7 @@ module.exports = async (req, res) => {
     // Check if SMTP is configured
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.error('SMTP credentials not configured');
-      res.status(500).set(corsHeaders).json({ 
+      res.status(500).json({ 
         success: false, 
         error: 'Email service not configured' 
       });
@@ -168,7 +171,7 @@ module.exports = async (req, res) => {
     
     console.log('Newsletter subscription processed:', email);
 
-    res.status(200).set(corsHeaders).json({ 
+    res.status(200).json({ 
       success: true, 
       message: 'Thank you for subscribing! Check your inbox for a confirmation email.'
     });
@@ -176,7 +179,7 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error('Newsletter subscription error:', error);
     
-    res.status(500).set(corsHeaders).json({ 
+    res.status(500).json({ 
       success: false, 
       error: 'Failed to subscribe. Please try again later.',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
