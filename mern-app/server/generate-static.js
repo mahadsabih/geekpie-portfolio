@@ -218,9 +218,9 @@ function generateAiSectorPageHTML(sector) {
   // Read the original template
   let template = getPortfolioTemplate();
   
-  // Replace the title in the <title> tag
+  // Replace the title in the <title> tag (handle both formats: with dash or double space)
   template = template.replace(
-    /<title>Mockup 3d – GeekPie<\/title>/,
+    /<title>Mockup 3d\s*[–-]?\s*GeekPie<\/title>/,
     `<title>${title} – GeekPie</title>`
   );
   
@@ -328,9 +328,9 @@ function generatePortfolioPageHTML(project) {
   // Read the original template
   let template = getPortfolioTemplate();
   
-  // Replace the title in the <title> tag
+  // Replace the title in the <title> tag (handle both formats: with dash or double space)
   template = template.replace(
-    /<title>Mockup 3d – GeekPie<\/title>/,
+    /<title>Mockup 3d\s*[–-]?\s*GeekPie<\/title>/,
     `<title>${title} – GeekPie</title>`
   );
   
