@@ -61,11 +61,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from uploads directory (at root level)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/ai-sectors', aiSectorRoutes);
-app.use('/api', contactRoutes); // Contact routes at /api/contact and /api/newsletter
+// API Routes - Note: Vercel strips /api prefix, so routes are relative
+app.use('/auth', authRoutes);
+app.use('/projects', projectRoutes);
+app.use('/ai-sectors', aiSectorRoutes);
+app.use('/', contactRoutes); // Contact routes at /contact and /newsletter
 
 // Root route
 app.get('/', (req, res) => {
@@ -73,23 +73,23 @@ app.get('/', (req, res) => {
     message: 'GeekPie Portfolio API',
     version: '1.0.0',
     endpoints: {
-      auth: '/api/auth',
-      projects: '/api/projects',
-      aiSectors: '/api/ai-sectors',
-      contact: '/api/contact',
-      newsletter: '/api/newsletter',
-      health: '/api/health'
+      auth: '/auth',
+      projects: '/projects',
+      aiSectors: '/ai-sectors',
+      contact: '/contact',
+      newsletter: '/newsletter',
+      health: '/health'
     }
   });
 });
 
 // Health check route
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
 // Generate static site endpoint
-app.post('/api/generate-static', async (req, res) => {
+app.post('/generate-static', async (req, res) => {
   try {
     const result = await generateStaticSite();
     if (result.success) {
