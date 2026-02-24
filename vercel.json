@@ -6,42 +6,6 @@
     {
       "source": "/uploads/:path*",
       "destination": "/uploads/:path*"
-    },
-    {
-      "source": "/static/:path*",
-      "destination": "/admin/static/:path*"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/admin/:path*",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/login",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/login/",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/dashboard/",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/project/new",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/project/:id",
-      "destination": "/admin/index.html"
     }
   ],
   "headers": [
@@ -53,12 +17,6 @@
     },
     {
       "source": "/wp-content/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/admin/static/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
