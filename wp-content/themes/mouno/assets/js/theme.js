@@ -366,6 +366,13 @@
             $('body').removeClass('body-overflow');
             $(links).removeClass('text-underline-slide')
         })
+
+        // Close hidden panel when menu item link is clicked
+        $('.pxl-post-template').on('click', '.menu-panel .pxl-menu-primary li a', function () {
+            $(currentTemplate).removeClass('active');
+            $('body').removeClass('body-overflow');
+            $(links).removeClass('text-underline-slide');
+        })
     }
 
     function updateTranslateZToParentHeight() {

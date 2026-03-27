@@ -13,6 +13,12 @@
     $(window).on('resize', function () {
         windowWidth = $(window).width();
         windowHeight = $(window).height();
+        // Close sidebar when resizing to desktop view
+        if (windowWidth >= 1200) {
+            $('.pxl-sidebar-menu').removeClass('active');
+            $('body').removeClass('body-overflow');
+            $('.pxl-header .pxl-header-backdrop').removeClass('active');
+        }
     });
 
     $(document).ready(function () { 
@@ -59,7 +65,14 @@
             $(this).closest('.pxl-sidebar-menu').toggleClass('active');
             $('body').removeClass('body-overflow');
             $('.pxl-header .pxl-header-backdrop').toggleClass('active')
-        }) 
+        })
+
+        // Close sidebar when menu item link is clicked
+        $('.pxl-sidebar-menu .pxl-menu-primary li a').on('click', function () {
+            $(this).closest('.pxl-sidebar-menu').removeClass('active');
+            $('body').removeClass('body-overflow');
+            $('.pxl-header .pxl-header-backdrop').removeClass('active');
+        })
         
     }
     // Menu Responsive Dropdown 
