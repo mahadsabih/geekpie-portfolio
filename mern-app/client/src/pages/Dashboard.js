@@ -117,10 +117,10 @@ const Dashboard = () => {
               </>
             )}
           </button>
-          <Link to="/projects/new" className="add-btn">
+          {/* <Link to="/projects/new" className="add-btn">
             <Plus size={20} />
             <span>Add Project</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -154,12 +154,12 @@ const Dashboard = () => {
               ? 'Try adjusting your search'
               : 'Get started by creating your first project'}
           </p>
-          {!searchTerm && (
+          {/* {!searchTerm && (
             <Link to="/projects/new" className="add-btn">
               <Plus size={20} />
               <span>Add Your First Project</span>
             </Link>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="projects-grid">
