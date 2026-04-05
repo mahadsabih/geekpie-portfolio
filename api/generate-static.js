@@ -233,7 +233,7 @@ function generateAiSectorPageHTML(sector) {
   // Remove the "Home" breadcrumb link
   template = template.replace(
     /<li><a class="pxl-breadcrumb-link" href="\/">Home<\/a><\/li><li class="pxl-breadcrumb-separator">\.<\/li>/g,
-    '<li class="pxl-breadcrumb-separator">.</li>'
+    '<li class="pxl-breadcrumb-separator"></li>'
   );
   
   // Replace the post title in the hero section
@@ -343,7 +343,7 @@ function generatePortfolioPageHTML(project) {
   // Remove the "Home" breadcrumb link
   template = template.replace(
     /<li><a class="pxl-breadcrumb-link" href="\/">Home<\/a><\/li><li class="pxl-breadcrumb-separator">\.<\/li>/g,
-    '<li class="pxl-breadcrumb-separator">.</li>'
+    '<li class="pxl-breadcrumb-separator"></li>'
   );
   
   // Replace the post title in the hero section (line 197)
