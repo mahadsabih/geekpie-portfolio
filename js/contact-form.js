@@ -83,9 +83,10 @@
         console.log('Message input element:', form.querySelector('textarea[name="your-message"]'));
 
         // Validate
-        if (!validateContactForm(formData)) {
-            console.log('Validation FAILED');
-            showResponse(responseOutput, CONFIG.messages.contact.validation, 'error');
+        const validation = validateContactForm(formData);
+        if (!validation.valid) {
+            console.log('Validation FAILED:', validation.error);
+            showResponse(responseOutput, validation.error, 'error');
             return;
         }
         console.log('Validation PASSED - sending to API');
@@ -131,8 +132,8 @@
         const email = form.querySelector('input[name="your-email"]')?.value?.trim() || '';
 
         // Validate email
-        if (!validateEmail(email)) {
-            showResponse(responseOutput, CONFIG.messages.newsletter.validation, 'error');
+        if (!email || !validateEmail(email)) {
+            showResponse(responseOutput, 'Please enter a valid email address', 'error');
             return;
         }
 
@@ -167,15 +168,21 @@
 
     function validateContactForm(data) {
         // Name validation
-        if (!data.name || data.name.length < 2) return false;
+        if (!data.name || data.name.trim().length < 3) {
+            return { valid: false, error: 'Please enter your name (at least 3 characters)' };
+        }
         
         // Email validation
-        if (!validateEmail(data.email)) return false;
+        if (!data.email || !validateEmail(data.email)) {
+            return { valid: false, error: 'Please enter a valid email address' };
+        }
         
         // Message validation
-        if (!data.message || data.message.length < 10) return false;
+        if (!data.message || data.message.trim().length < 10) {
+            return { valid: false, error: 'Please enter your message (at least 10 characters)' };
+        }
         
-        return true;
+        return { valid: true };
     }
 
     function validateEmail(email) {
