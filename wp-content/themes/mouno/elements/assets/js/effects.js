@@ -246,7 +246,8 @@
                 delay: settings['delay'],
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%", 
+                    start: "top 95%", 
+                    end: "top 40%",
                     toggleActions: "play none reverse none",
                     scrub: true,
                 },
